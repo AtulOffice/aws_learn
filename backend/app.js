@@ -5,9 +5,10 @@ import { router } from "./routes/noteRoutes.js"
 const app = express();
 
 const corsOptions = {
-    origin: [
-        `${process.env.FRONT_PORT}`,
-    ],
+    // origin: [
+    //     `${process.env.FRONT_PORT}`,
+    // ],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
