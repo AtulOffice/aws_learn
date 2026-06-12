@@ -20,4 +20,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/notes", router);
+app.get("/hello", (req, res) => {
+    res.send("hello i am server message")
+})
 export default app;
