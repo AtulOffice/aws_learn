@@ -6,7 +6,7 @@ function App() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:6005/api/notes";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchNotes = async () => {
     try {
@@ -92,7 +92,7 @@ function App() {
           </div>
         ) : (
           <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100">
-            {notes.map((note) => (
+            {notes?.map((note) => (
               <div
                 key={note._id}
                 className="bg-white rounded-2xl shadow-md border border-slate-100 p-5 transition-all hover:shadow-lg hover:-translate-y-0.5"
