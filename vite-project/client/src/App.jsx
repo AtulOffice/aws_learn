@@ -4,6 +4,7 @@ import axios from "axios";
 function App() {
   const [notes, setNotes] = useState([]);
   const [text, setText] = useState("");
+  const [serverInfo, setServerInfo] = useState("");
   const [loading, setLoading] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL;
@@ -21,9 +22,19 @@ function App() {
       setLoading(false);
     }
   };
+  const fetchServerInfo = async () => {
+    try {
+      const { data } = await axios.get(`${API_URL}/server-info`);
+      console.log(data)
+      setServerInfo(data.hostname);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchNotes();
+    fetchServerInfo();
   }, []);
 
   const addNote = async () => {
@@ -54,9 +65,13 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-slate-100 p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10 text-slate-800 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-slate-800 tracking-tight">
           📝 Notes
         </h1>
+
+        <p className="text-center text-sm text-slate-500 mb-10 mt-2">
+          Served by: {serverInfo}
+        </p>
 
         {/* Input Card */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-5 sm:p-6 mb-8 transition-all hover:shadow-xl">
